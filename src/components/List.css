@@ -1,0 +1,8 @@
+.card {
+    height: 35rem;
+    overflow: auto;
+}
+
+.message-body {
+    height: 15rem
+}
