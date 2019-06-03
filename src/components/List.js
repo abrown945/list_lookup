@@ -20,15 +20,23 @@ class List extends React.Component {
     }
 
     loadPersonInfo = (id) => {
-        debugger;
-        let personIndex = id;
+        const personIndex = this.state.person.findIndex( p => {
+            return p.id === id;
+        });
 
-        let personSelected = {
+        const selectedPerson = {
             ...this.state.person[personIndex]
         };
-        
+
+        const personUpdate = this.state.person.map(person => {
+            // console.log(person.selected);
+            if (person.id === id) return { ...person, selected: !person.selected };
+            return person;
+        });
+
         this.setState({ 
-            personPassed: personSelected
+            personPassed: selectedPerson,
+            person: personUpdate
          });
     }
 
@@ -41,7 +49,7 @@ class List extends React.Component {
                         selectedStyle={this.state.selected}
                         name={person.name}
                         key={person.id} 
-                        click={() => this.loadPersonInfo(index)} />                        
+                        click={() => this.loadPersonInfo(person.id)} />                        
             })} 
         </div>
 
